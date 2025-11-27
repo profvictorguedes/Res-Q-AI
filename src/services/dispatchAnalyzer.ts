@@ -325,7 +325,7 @@ Return a JSON object with:
 JSON:`;
 
   try {
-    const response = await fetch(`${config.endpoint}/openai/deployments/${config.deploymentName}/chat/completions?api-version=2024-02-15-preview`, {
+    const response = await fetch(`${config.endpoint}/openai/deployments/${config.deploymentName}/chat/completions?api-version=2024-06-01`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -349,21 +349,33 @@ JSON:`;
     const data = await response.json();
     const aiResponse = data.choices?.[0]?.message?.content;
     
+    const validHazardTypes = ['fire', 'chemical', 'structural', 'electrical', 'gas', 'unknown'] as const;
+    const validSeverities = ['low', 'medium', 'high', 'critical'] as const;
+    
     if (aiResponse) {
       try {
         const parsed = JSON.parse(aiResponse);
         const coordinates = extractCoordinatesFromAddress(parsed.address || dispatchText);
         
-        const hazards: Hazard[] = (parsed.hazards || []).map((h: {type?: string; description?: string; severity?: string}) => ({
-          id: uuidv4(),
-          type: h.type || 'unknown',
-          description: h.description || 'Unknown hazard',
-          location: {
-            lat: coordinates.lat + Math.random() * 0.0004 - 0.0002,
-            lng: coordinates.lng + Math.random() * 0.0004 - 0.0002,
-          },
-          severity: h.severity || 'medium',
-        }));
+        const hazards: Hazard[] = (parsed.hazards || []).map((h: {type?: string; description?: string; severity?: string}) => {
+          const hazardType = validHazardTypes.includes(h.type as typeof validHazardTypes[number]) 
+            ? h.type as Hazard['type'] 
+            : 'unknown';
+          const hazardSeverity = validSeverities.includes(h.severity as typeof validSeverities[number])
+            ? h.severity as Hazard['severity']
+            : 'medium';
+          
+          return {
+            id: uuidv4(),
+            type: hazardType,
+            description: h.description || 'Unknown hazard',
+            location: {
+              lat: coordinates.lat + Math.random() * 0.0004 - 0.0002,
+              lng: coordinates.lng + Math.random() * 0.0004 - 0.0002,
+            },
+            severity: hazardSeverity,
+          };
+        });
         
         return {
           id: uuidv4(),
