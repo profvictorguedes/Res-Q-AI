@@ -1,0 +1,47 @@
+{
+  "appDisplayName": "Res-Q AI",
+  "description": "Used by first responders and dispatch officers to enter incident details and view AI-generated scene diagrams for safer, quicker planning.",
+  "environmentId": "858e3bab-b5df-e467-a5eb-df3330ddf104",
+  "buildPath": "./dist",
+  "buildEntryPoint": "index.html",
+  "logoPath": "Default",
+  "localAppUrl": "http://localhost:5173/",
+  "appId": "782043aa-164e-4d71-bf41-1a747f29e6db",
+  "connectionReferences": {},
+  "databaseReferences": {
+    "default.cds": {
+      "state": "Configured",
+      "instanceUrl": "https://org2172bde9.api.crm.dynamics.com",
+      "webApiVersion": "v9.0",
+      "dataSources": {
+        "crb64_incident": {
+          "entitySetName": "crb64_incidents",
+          "logicalName": "crb64_incident",
+          "isHidden": false
+        },
+        "crb64_hazard": {
+          "entitySetName": "crb64_hazards",
+          "logicalName": "crb64_hazard",
+          "isHidden": false
+        },
+        "crb64_path": {
+          "entitySetName": "crb64_paths",
+          "logicalName": "crb64_path",
+          "isHidden": false
+        },
+        "crb64_responder": {
+          "entitySetName": "crb64_responders",
+          "logicalName": "crb64_responder",
+          "isHidden": false
+        },
+        "crb64_dispatchnote": {
+          "entitySetName": "crb64_dispatchnotes",
+          "logicalName": "crb64_dispatchnote",
+          "isHidden": false
+        }
+      },
+      "version": "v9.0",
+      "environmentVariableName": ""
+    }
+  }
+}

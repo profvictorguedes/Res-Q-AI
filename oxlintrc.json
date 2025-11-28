@@ -1,0 +1,47 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "ignorePatterns": [
+    "node_modules/**",
+    "node_modules/.cache/**",
+    ".git/**",
+    "dist/**",
+    "**/*.d.ts",
+    "**/*.d.cts",
+    "**/*.d.mts",
+    "**/test/**/*.js",
+    "**/tests/**/*.js"
+  ],
+  "plugins": ["react", "jsx-a11y", "typescript", "import"],
+  "rules": {
+    "import/named": "error",
+    "import/no-cycle": "error",
+    "no-const-assign": "error",
+    "no-this-before-super": "error",
+    "no-undef": "error",
+    "no-unused-vars": "error",
+    "react/exhaustive-deps": "error",
+    "react/jsx-key": "error",
+    "react/jsx-no-duplicate-props": "error",
+    "react/jsx-no-target-blank": "error",
+    "react/jsx-no-undef": "error",
+    "react/no-children-prop": "error",
+    "react/no-danger-with-children": "error",
+    "react/no-direct-mutation-state": "error",
+    "react/no-unknown-property": "error",
+    "react/require-render-return": "error",
+    "react/rules-of-hooks": "error",
+    "react/void-dom-elements-no-children": "error",
+    "use-isnan": "error"
+  },
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "React": "readonly"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}
